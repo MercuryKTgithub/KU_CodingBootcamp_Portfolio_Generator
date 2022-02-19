@@ -1,5 +1,7 @@
+// Warm-up I
+
 // https://nodejs.org/dist/latest-v12.x/docs/api/process.html
-//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
 
 var greetings = 'Hello Node!';
 console.log(greetings);
@@ -73,7 +75,8 @@ console.log('``````````````````````````````````````````````````````````');
 //    `;
 //  };
 
- const generatePage = require('./src/page_template');
+ const generatePage = require('./src/page_template'); // used in conjunction with generatePage(names, github)
+ console.log(generatePage);
 
 // (A)
 // const names = profileDataArgs[0];
@@ -86,11 +89,12 @@ console.log('``````````````````````````````````````````````````````````');
 
 //  Assignment destructuring : assigns elements of an array to variable names in a single expression
 // (A) can be replaced by 
-// (B) assignment destructuring
-const [names, github] = profileDataArgs;
 
-console.log(names, github); // on one line, prints Huong Tran Developer 
-console.log('*******************************************************');
-console.log(generatePage(names, github)); //print only the entire html
+// (B) assignment destructuring
+// // const [names, github] = profileDataArgs;
+// // 
+// // console.log(names, github); // on one line, prints Huong Tran Developer 
+// // console.log('*******************************************************');
+// // console.log(generatePage(names, github)); //print only the entire html
 
 

@@ -1,0 +1,26 @@
+{
+  "name": "ku_codingbootcamp_portfolio_generator",
+  "version": "1.0.0",
+  "description": "Kimberly First NodeJS Lab",
+  "main": "realapp.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MercuryKTgithub/KU_CodingBootcamp_Portfolio_Generator.git"
+  },
+  "keywords": [
+    "module",
+    "howto"
+  ],
+  "author": "not applied",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MercuryKTgithub/KU_CodingBootcamp_Portfolio_Generator/issues"
+  },
+  "homepage": "https://github.com/MercuryKTgithub/KU_CodingBootcamp_Portfolio_Generator#readme",
+  "dependencies": {
+    "inquirer": "^8.2.0"
+  }
+}

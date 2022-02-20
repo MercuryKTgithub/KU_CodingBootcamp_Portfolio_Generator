@@ -1,7 +1,10 @@
 const generatePage = require('./src/page_template');
-const fs = require('fs');
+// const fs = require('fs'); // no longer need, delegate to util
 const inquirer = require('inquirer');
-// console.log(inquirer)
+
+// const generateSite = require('utils/generate-site.js'); //  This will allow us to use generateSite.writeFile() generateSite.copyFile()
+// const { writeFileMethod, copyFileMethod } = require('./utils/generate-site.js');
+const { writeFile, copyFile  } = require('./utils/generate-site.js');
 
 // inquirer.prompt([
 //     {
@@ -150,14 +153,42 @@ const promptClient = () => {
 //               .then(promptProject)
 //               .then(projectAns => console.log(projectAns));
 
+// // promptClient()
+// //   .then(promptProject)
+// //   .then(portfolioData => {
+// //    //  console.log(portfolioData);
+// //     const pageHTML = generatePage(portfolioData); // see const generatePage line 1
+// //     fs.writeFile('dist/index.html', pageHTML, err => {
+// //       if (err) throw new Error(err);
+// //       console.log('Page created! Check out index.html in this directory to see it!');
+// //       fs.copyFile('src/style.css', 'dist/style.css', err => {
+// //          if (err) {
+// //             console.log(err);
+// //             return;
+// //          }
+// //          console.log('Style sheet copied successfully!');
+// //       });
+// //     });
+// //   });
+
 promptClient()
-  .then(promptProject)
-  .then(portfolioData => {
-   //  console.log(portfolioData);
-    // will be uncommented in lesson 4
-    const pageHTML = generatePage(portfolioData);
-    fs.writeFile('./index.html', pageHTML, err => {
-      if (err) throw new Error(err);
-      console.log('Page created! Check out index.html in this directory to see it!');
-    });
-  });
+   .then(promptProject)
+   .then(portfolioData => {
+      return generatePage(portfolioData);
+   })
+   .then(pageHTML => {
+      // return writeFileMethod(pageHTML); // returns a Promise
+      return writeFile(pageHTML); // returns a Promise
+   })
+   .then(writeFileResponse => {
+      console.log(writeFileResponse); //writeFileResponse is the object provided by the writeFile() function's resolve() execution
+      // return copyFileMethod(); // returns a Promise
+      return copyFile(); // returns a Promise
+   })
+   .then(copyFileResponse => {
+      console.log(copyFileResponse); //copyFileResponse is the object provided by the copyFile() function's resolve() execution
+   })
+   .catch(err => {
+      console.log(err);
+   });
+

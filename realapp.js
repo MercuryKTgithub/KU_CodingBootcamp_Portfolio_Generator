@@ -1,16 +1,7 @@
 const generatePage = require('./src/page_template');
-const fs = require('fs');
 const inquirer = require('inquirer');
-// console.log(inquirer)
 
-// inquirer.prompt([
-//     {
-//       type: 'input',
-//       name: 'name',
-//       message: 'What is your name?'
-//     }
-//   ])
-//   .then(ansEntity => console.log(ansEntity));
+const { writeFile, copyFile  } = require('./utils/generate-site.js');
 
 const promptProject = (portfolioData) => { 
    console.log(`
@@ -143,21 +134,22 @@ const promptClient = () => {
     ]);
 };
 
-// promptClient().then(ansEntity => console.log(ansEntity));
-
-// // Using Promises, we can chain the functions together using the then() method
-// promptClient().then(clientAns => console.log(clientAns))
-//               .then(promptProject)
-//               .then(projectAns => console.log(projectAns));
-
 promptClient()
-  .then(promptProject)
-  .then(portfolioData => {
-   //  console.log(portfolioData);
-    // will be uncommented in lesson 4
-    const pageHTML = generatePage(portfolioData);
-    fs.writeFile('./index.html', pageHTML, err => {
-      if (err) throw new Error(err);
-      console.log('Page created! Check out index.html in this directory to see it!');
-    });
-  });
+   .then(promptProject)
+   .then(portfolioData => {
+      return generatePage(portfolioData);
+   })
+   .then(pageHTML => {
+      return writeFile(pageHTML); // returns a Promise
+   })
+   .then(writeFileResponse => {
+      console.log(writeFileResponse); //writeFileResponse is the object provided by the writeFile() function's resolve() execution
+      return copyFile(); // returns a Promise
+   })
+   .then(copyFileResponse => {
+      console.log(copyFileResponse); //copyFileResponse is the object provided by the copyFile() function's resolve() execution
+   })
+   .catch(err => {
+      console.log(err);
+   });
+
